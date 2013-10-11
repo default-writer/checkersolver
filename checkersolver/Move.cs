@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace checkersolver
 {
-    internal class Move : IEquatable<Move>
+    public class Move : IEquatable<Move>
     {
         private readonly Field node;
         private readonly Field near;
@@ -48,12 +48,12 @@ namespace checkersolver
             return node.Exists(this, near, far);
         }
 
-        internal bool DoMove()
+        public bool DoMove()
         {
             return node.DoMove(this, near, far);
         }
 
-        internal bool UndoMove()
+        public bool UndoMove()
         {
             return node.UndoMove(this, near, far);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace checkersolver
 {
-    internal class Board
+    public class Board
     {
         private readonly Random rnd;
         private readonly Field[] nodes;
@@ -222,13 +222,13 @@ namespace checkersolver
             return false;
         }
 
-        internal ulong Hash { get { return hash; } }
+        public ulong Hash { get { return hash; } }
 
         internal bool Exists(ulong hash)
         {
             return data.Contains(hash);
         }
 
-        internal Move Move { get { if (history.Moves.Count > 0) { return history.Moves.Peek(); } return null; } }
+        public Move Move { get { if (history.Moves.Count > 0) { return history.Moves.Peek(); } return null; } }
     }
 }
