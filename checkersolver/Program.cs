@@ -8,7 +8,14 @@ namespace checkersolver
     {
         private static void Main(string[] args)
         {
-            Board board = new Board(1);
+            int seed = 1;
+            if (args.Length != 1 || !Int32.TryParse(args[0], out seed))
+            {
+                Random rnd = new Random((int)DateTime.Now.Ticks);
+                seed = rnd.Next();
+            }
+            Console.WriteLine("RNG {0}", seed);
+            Board board = new Board(seed);
             int depth = 0;
             do
             {
