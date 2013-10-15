@@ -11,7 +11,7 @@ namespace checkersolver
         private readonly History history;
         private readonly BoardEnumerator enumerator;
         private readonly Func<Field>[] f;
-        private readonly HashSet<ulong> data;
+        private readonly HashSet<ulong> hashSet;
 
         private ulong hash;
 
@@ -22,7 +22,7 @@ namespace checkersolver
 
         public Board(int seed)
         {
-            data = new HashSet<ulong>();
+            hashSet = new HashSet<ulong>();
             enumerator = new BoardEnumerator(this);
             rnd = new Random(seed);
             history = new History();
@@ -139,7 +139,7 @@ namespace checkersolver
             Use(30);
             Use(31);
             Use(32);
-            data.Add(hash);
+            hashSet.Add(hash);
         }
 
         //internal Field this[int index] { get { return nodes[index]; } }
@@ -168,7 +168,7 @@ namespace checkersolver
 
         internal void DoMove(Field node, Field near, Field far, Move move)
         {
-            data.Add(hash);
+            hashSet.Add(hash);
             empty.Remove(node);
             empty.Add(near);
             empty.Add(far);
@@ -226,7 +226,7 @@ namespace checkersolver
 
         internal bool Exists(ulong hash)
         {
-            return data.Contains(hash);
+            return hashSet.Contains(hash);
         }
 
         public Move Move { get { if (history.Moves.Count > 0) { return history.Moves.Peek(); } return null; } }
