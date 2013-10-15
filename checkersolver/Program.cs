@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace checkersolver
@@ -8,15 +9,24 @@ namespace checkersolver
     {
         private static void Main(string[] args)
         {
-            int seed = 1;
-            if (args.Length != 1 || !Int32.TryParse(args[0], out seed))
+            int seed = 1538872388;
+            int value;
+            if (args.Length == 1)
+            {
+                if (Int32.TryParse(args[0], out value))
+                {
+                    seed = value;
+                }
+            }
+            else
             {
                 Random rnd = new Random((int)DateTime.Now.Ticks);
                 seed = rnd.Next();
             }
-            Console.WriteLine("RNG {0}", seed);
             Board board = new Board(seed);
+            Stopwatch sw = new Stopwatch();
             int depth = 0;
+            sw.Start();
             do
             {
                 foreach (Move move in board.Moves)
@@ -39,6 +49,8 @@ namespace checkersolver
                     break;
                 }
             } while (true);
+            sw.Stop();
+            Console.WriteLine("RNG {0} {1}", seed, sw.Elapsed);
             Stack<Move> history = new Stack<Move>();
             while (depth-- > 0)
             {
